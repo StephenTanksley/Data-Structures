@@ -15,6 +15,34 @@ Stretch: What if you could only use instances of your Stack class to implement t
 """
 
 
+#  Initialized using a list.
+
+# class Queue:
+#     def __init__(self):
+#         self.size = 0
+#         self.storage = []
+
+#     def __len__(self):
+#         return self.size
+
+#     def enqueue(self, value):
+# We insert a value into the list at the end by using len(self.storage) to find the greatest index.
+#         self.storage.insert(len(self.storage), value)
+#         self.size += 1
+#         return self.storage
+
+#     def dequeue(self):
+#         if(self.size > 0):
+#             self.storage.pop(0)
+#             self.size -= 1
+#             return self.storage
+#         else:
+#             print("There's nothing to remove.")
+
+
+# queue = Queue()
+
+
 class Queue:
     def __init__(self):
         self.size = 0
@@ -24,8 +52,35 @@ class Queue:
         return self.size
 
     def enqueue(self, value):
-        self.storage.insert(len(self.storage), value)
         self.size += 1
+        return self.storage.insert(len(self.storage), value)
 
     def dequeue(self):
-        self.storage.pop(0)
+        if(self.size > 0):
+            self.size -= 1
+            return self.storage.pop(0)
+
+        else:
+            print("There's nothing to remove.")
+
+
+queue = Queue()
+
+
+# queue.enqueue(5)
+
+# print("storage length: ", len(queue.storage))
+# # queue.enqueue(75)
+# # queue.enqueue(6)
+
+
+# # print(queue.storage)
+# # print(queue.__len__())
+
+# # queue.dequeue()
+# # queue.dequeue()
+# # queue.dequeue()
+# # queue.dequeue()
+
+# print(queue.storage)
+# print(queue.__len__())
