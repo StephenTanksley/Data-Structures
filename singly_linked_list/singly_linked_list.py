@@ -65,12 +65,3 @@ class LinkedList:
 
 
 linked_list = LinkedList()
-
-linked_list.add_to_head("data.")
-linked_list.add_to_head("of")
-linked_list.add_to_head("piece")
-linked_list.add_to_head("a")
-linked_list.add_to_head("is")
-linked_list.add_to_head("This")
-
-print(linked_list.tail.value)
