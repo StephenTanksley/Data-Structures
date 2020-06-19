@@ -28,9 +28,9 @@ class Queue:
         return self.size
 
     def enqueue(self, value):
-        self.storage.insert(len(self.storage), value)
+        added = self.storage.insert(len(self.storage), value)
         self.size += 1
-        return self.storage
+        return added
 
     def dequeue(self):
         if(self.size > 0):
@@ -79,9 +79,6 @@ queue.enqueue(8)
 # # queue.enqueue(75)
 # # queue.enqueue(6)
 
-
-print(queue.storage)
-print(queue.__len__())
 
 # # queue.dequeue()
 # # queue.dequeue()

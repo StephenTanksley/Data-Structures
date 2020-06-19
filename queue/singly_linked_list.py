@@ -19,16 +19,17 @@ class LinkedList:
         self.tail = None  # stores a node that is the end of the list
 
     def add_to_head(self, value):
-        # create a node to add
+        # Step 1 - make a new node
         new_node = Node(value)
         # check if list is empty
         if self.head is None and self.tail is None:
             self.head = new_node
             self.tail = new_node
         else:
-            # new_node should point to current head
+
+            # Step 2 - make the marker for your new node equal to whatever this old head value is.
             new_node.next_node = self.head
-            # move head to new node
+            # Step 3 - re-assign the head node to self.head
             self.head = new_node
 
     def add_to_tail(self, value):
