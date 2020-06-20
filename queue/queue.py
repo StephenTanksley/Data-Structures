@@ -150,7 +150,7 @@ class Queue:
         if(self.size > 0):
             self.size -= 1
             print(f'Item removed. Queue is {self.size} items long.')
-            self.storage.remove_head()
+            return self.storage.remove_head()
         else:
             print("There's nothing to remove.")
 
