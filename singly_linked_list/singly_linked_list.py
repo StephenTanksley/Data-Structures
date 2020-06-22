@@ -5,63 +5,88 @@ class Node:
 
 
 class LinkedList:
-    def __init__(self):
-        # Stores a node that corresponds to the first node in the list.
-        self.head = None
-        # Stores a node that is the end of the list.
-        self.tail = None
+    def __init__(self, head=None, tail=None, length=0):
+        self.head = head
+        self.tail = tail
+        self.length = length
 
-    def add_to_head(self, value):
-        # create a new node to add
-        new_node = Node(value)
+    def __len__(self):
+        return self.length
 
-        # check to see if the list is empty
+    def get_max(self):
+        if self.head is None:
+            return None
+
+        current_maximum = self.head
+        current_node = self.head
+
+        while current_node is not None:
+            if current_node.next_node is not None:
+                if current_node.value >= current_node.next_node.value:
+                    current_maximum = current_node
+                    current_node = current_node.next_node
+                else:
+                    current_maximum = current_node.next_node
+                    current_node = current_node.next_node
+            else:
+                return current_maximum.value
+
+    # Add a new item to the head of the list.
+    def add_to_head(self, data):
+        new_node = Node(data)
         if self.head is None and self.tail is None:
             self.head = new_node
             self.tail = new_node
         else:
-            # new_node should point to the current head
             new_node.next_node = self.head
-            # move head to new node
             self.head = new_node
+        self.length += 1
+        return self
 
-    def add_to_tail(self, value):
-        # create a new node to add
-        new_node = Node(value)
-        # check to see if the list is empty
+    def add_to_tail(self, data):
+        new_node = Node(data)
         if self.head is None and self.tail is None:
             self.head = new_node
             self.tail = new_node
         else:
-            # point the node at the current tail to the new node
-            self.tail.new_node = new_node
+            self.tail.next_node = new_node
             self.tail = new_node
 
+        self.length += 1
+        return self
+
+    # delete an item from the end
     def remove_head(self):
-        # if list is empty, do nothing
         if not self.head:
             return None
-        # if list only has one element, set head and tail to None.
 
         if self.head.next_node is None:
             head_value = self.head.value
             self.head = None
             self.tail = None
+            self.length = 0
             return head_value
-            # otherwise we have more elements in the list.
+
+        head_value = self.head.value
+        self.head = self.head.next_node
+        self.length -= 1
+        return head_value
 
     def contains(self, value):
         if self.head is None:
             return False
-        else:
-            # Loop through each node until we see the value or if we can go no further
-            current_node = self.head
-            while current_node is not None:
-                # check to see if this is the node that we're looking for
-                if(current_node == value):
-                    return True
-                current_node = current_node.next_node
-            return False
 
+        current_node = self.head
 
-linked_list = LinkedList()
+        while current_node is not None:
+            if current_node.value == value:
+                return True
+            current_node = current_node.next_node
+
+        return False
+
+    def print_list(self):
+        current = self.head
+        while(current):
+            print(f'The current value is {current.value}')
+            current = current.next_node
