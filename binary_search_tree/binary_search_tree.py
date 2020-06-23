@@ -9,6 +9,18 @@ This part of the project comprises two days:
 2. Implement the `in_order_print`, `bft_print`, and `dft_print` methods
    on the BSTNode class.
 """
+
+"""
+A binary search tree has a few rules.
+
+1) Must be a node-based construct.
+2) The left subtree of a node contains only nodes with keys lesser than the original node's key.
+3) the right subtree of a node contains only nodes with keys greater than the original node's key.
+4) The left and right subtrees of the original node
+
+"""
+
+
 class BSTNode:
     def __init__(self, value):
         self.value = value
@@ -17,11 +29,41 @@ class BSTNode:
 
     # Insert the given value into the tree
     def insert(self, value):
+        # Take the current value of our node
+        # Compare to the new value we want to insert.
+
+        # if new_value < self.value
+        # if self.left is already taken by a node:
+        # make the left node call insert
+        # set the left child to the new node with the new value.
+
+        # if new_value >= self.value
+        # if self.right is already taken by a node:
+        # make the right node call insert
+        # set the right child to the new node with the new value.
+
+        # Return True if the tree contains the value
+        # False if it does not
+
         pass
 
-    # Return True if the tree contains the value
-    # False if it does not
     def contains(self, target):
+        """
+        # compare the target to current value
+        if current.self.value == target:
+            return True
+
+        # if the current target is smaller than the current_value:
+            go left
+            if you can't go left, return False
+        # if the current target is greater than the current_value:
+            go right
+            if you can't go right, return False
+
+
+        """
+        # Start at root.
+        # Check to see if the root is the same value as your target.
         pass
 
     # Return the maximum value found in the tree
