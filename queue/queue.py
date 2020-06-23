@@ -1,3 +1,4 @@
+
 class Node:
     def __init__(self, value=None, next_node=None):
         self.value = value
@@ -6,80 +7,84 @@ class Node:
 
 class LinkedList:
     def __init__(self, head=None, tail=None, length=0):
-        # Stores a node that corresponds to the first node in the list.
-        self.head = None
-        # Stores a node that is the end of the list.
-        self.tail = None
+        self.head = head
+        self.tail = tail
         self.length = length
 
     def __len__(self):
         return self.length
 
-    def add_to_head(self, value):
-        # create a new node to add
-        new_node = Node(value)
-
-        # check to see if the list is empty
-        if self.head is None and self.tail is None:
-            self.head = new_node
-            self.tail = new_node
-            self.length += 1
-        else:
-            # new_node should point to the current head
-            new_node.next_node = self.head
-            # move head to new node
-            self.head = new_node
-            self.length += 1
-
-    def add_to_tail(self, value):
-        # create a new node to add
-        new_node = Node(value)
-        # check to see if the list is empty
-        if self.head is None and self.tail is None:
-            self.head = new_node
-            self.tail = new_node
-            self.length += 1
-        else:
-            # point the node at the current tail to the new node
-            self.tail.new_node = new_node
-            self.tail = new_node
-            self.length += 1
-
-    def remove_head(self):
-        # if list is empty, do nothing
-        if(not self.head):
+    def get_max(self):
+        if self.head is None:
             return None
 
-        # if list only has one element, set head and tail to None.
-        elif self.head.next_node is None:
-            temp_head = self.head
+        current_maximum = self.head
+        current_node = self.head
+
+        while current_node is not None:
+            if current_node.next_node is not None:
+                if current_node.value >= current_node.next_node.value:
+                    current_maximum = current_node
+                    current_node = current_node.next_node
+                else:
+                    current_maximum = current_node.next_node
+                    current_node = current_node.next_node
+            else:
+                return current_maximum.value
+
+    # Add a new item to the head of the list.
+    def add_to_head(self, data):
+        new_node = Node(data)
+        if self.head is None and self.tail is None:
+            self.head = new_node
+            self.tail = new_node
+        else:
+            new_node.next_node = self.head
+            self.head = new_node
+        self.length += 1
+        return self
+
+    def add_to_tail(self, data):
+        new_node = Node(data)
+        if self.head is None and self.tail is None:
+            self.head = new_node
+            self.tail = new_node
+        else:
+            self.tail.next_node = new_node
+            self.tail = new_node
+
+        self.length += 1
+        return self
+
+    # delete an item from the end
+    def remove_head(self):
+        if not self.head:
+            return None
+
+        if self.head.next_node is None:
+            head_value = self.head.value
             self.head = None
             self.tail = None
-            self.length -= 1
-            return temp_head.value
+            self.length = 0
+            return head_value
 
-        # 1) store value temporarily: temp = self.head
-        # 2) move head or tail pointer next step in: self.head = self.head.next_node
-        # 3) remove pointers to next node in the chain temp.next_node = None
-        else:
-            temp_head = self.head
-            self.head = self.head.next_node
-            temp_head.next_node = None
-            self.length -= 1
-            return temp_head.value
+        head_value = self.head.value
+        self.head = self.head.next_node
+        self.length -= 1
+        return head_value
 
     def contains(self, value):
         if self.head is None:
             return False
-        else:
-            # Loop through each node until we see the value or if we can go no further
-            current_node = self.head
-            while current_node is not None:
-                # check to see if this is the node that we're looking for
-                if(current_node == value):
-                    return True
-                current_node = current_node.next_node
-            return False
+
+        current_node = self.head
+
+        while current_node is not None:
+            if current_node.value == value:
+                return True
+            current_node = current_node.next_node
+
+        return False
 
     def print_list(self):
         current = self.head
@@ -143,14 +148,17 @@ class Queue:
     def enqueue(self, value):
         self.size += 1
         self.storage.add_to_tail(value)
-        print(f'New value: {value}, queue is {self.size} items long.')
+        print(
+            f'New value: {self.storage.tail.value}, queue is {self.size} items long.')
         return self.storage.tail
 
     def dequeue(self):
         if(self.size > 0):
             self.size -= 1
             print(f'Item removed. Queue is {self.size} items long.')
-            return self.storage.remove_head()
+            item = self.storage.remove_head()
+            print(item)
+            return item
         else:
             print("There's nothing to remove.")
 
@@ -168,11 +176,14 @@ queue.enqueue(101)
 queue.enqueue(105)
 queue.enqueue(201)
 
+print("storage length: ", len(queue.storage))
+
 print("----------- dequeue methods ----------")
 
 queue.dequeue()
 queue.dequeue()
 queue.dequeue()
+print("storage length: ", len(queue.storage))
 
 # # queue.dequeue()
 # # queue.dequeue()
