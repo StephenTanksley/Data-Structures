@@ -48,6 +48,22 @@ class BSTNode:
         pass
 
     def contains(self, target):
+
+        if self.value == target:
+            return True
+
+        elif self.value < target:
+            if self.left is None:
+                return False
+            found = self.left.contains(target)
+
+        elif self.value > target:
+            if self.right is None:
+                return False
+            found = self.right.contains(target)
+
+        return found
+
         """
         # compare the target to current value
         if current.self.value == target:
