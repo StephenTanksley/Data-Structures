@@ -31,7 +31,18 @@ class BSTNode:
     def insert(self, value):
         # Take the current value of our node
         # Compare to the new value we want to insert.
+        new_node = BSTNode(value)
 
+        if not self:
+            return new_node
+        if self.value == value:
+            return
+        if value < self.value:
+            self.left = new_node
+        if value > self.value:
+            self.right = new_node
+
+        return new_node
         # if new_value < self.value
         # if self.left is already taken by a node:
         # make the left node call insert
@@ -48,47 +59,40 @@ class BSTNode:
         pass
 
     def contains(self, target):
-
         if self.value == target:
             return True
 
-        elif self.value < target:
+        # If the value of the node is greater than the target:
+        elif self.value > target:
+            # Check to see if self.left is None.
             if self.left is None:
+                # If it is, return false.
                 return False
+            # Otherwise, call the function again on the node contained on the left side of the root node's tree.
             found = self.left.contains(target)
 
-        elif self.value > target:
+        # If the value of the node is less than the target:
+        elif self.value < target:
+            # Check to see if self.right is None.
             if self.right is None:
+                # If it is, return false.
                 return False
+            # Otherwise, call the function again on the node contained on the right side of the root node's tree.
             found = self.right.contains(target)
-
         return found
 
-        """
-        # compare the target to current value
-        if current.self.value == target:
-            return True
-
-        # if the current target is smaller than the current_value:
-            go left
-            if you can't go left, return False
-        # if the current target is greater than the current_value:
-            go right
-            if you can't go right, return False
-
-
-        """
-        # Start at root.
-        # Check to see if the root is the same value as your target.
-        pass
-
-    # Return the maximum value found in the tree
+    # We need to check nodes on the right side of the tree to find the one with the greatest value.
     def get_max(self):
-        pass
+        # Define current_node as self.
+        current = self
 
-    # Call the function `fn` on the value of each node
+        # If you can't go any further to the right, you've reached the end.
+        while(current.right):
+            current = current.right
+        return current.value
+
     def for_each(self, fn):
-        pass
+        fn(self.value)
 
     # Part 2 -----------------------
 
