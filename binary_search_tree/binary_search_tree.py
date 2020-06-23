@@ -32,17 +32,29 @@ class BSTNode:
         # Take the current value of our node
         # Compare to the new value we want to insert.
         new_node = BSTNode(value)
+        x = self
+        y = None
 
-        if not self:
-            return new_node
-        if self.value == value:
-            return
-        if value < self.value:
-            self.left = new_node
-        if value > self.value:
-            self.right = new_node
+        # traversal code
+        while (x != None):
+            y = x
+            if(value < x.value):
+                x = x.left
+            else:
+                x = x.right
 
-        return new_node
+        # If there's no node at self, we want to create one.
+        if(y == None):
+            y = new_node
+
+        # if the value stored inside the root node is greater than the value, we go left.
+        elif(value < y.value):
+            y.left = new_node
+        else:
+            y.right = new_node
+
+        return y
+
         # if new_value < self.value
         # if self.left is already taken by a node:
         # make the left node call insert
@@ -55,8 +67,6 @@ class BSTNode:
 
         # Return True if the tree contains the value
         # False if it does not
-
-        pass
 
     def contains(self, target):
         if self.value == target:
