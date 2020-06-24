@@ -96,8 +96,9 @@ class DoublyLinkedList:
     def remove_from_head(self):
         if self.head is None:
             return None
-        head_value = self.head.value
-        self.delete(self.head)
+        else:
+            head_value = self.head.value
+            self.delete(self.head)
         return head_value
 
     """Wraps the given value in a ListNode and inserts it
@@ -136,8 +137,9 @@ class DoublyLinkedList:
     def remove_from_tail(self):
         if self.tail is None:
             return None
-        tail_value = self.tail.value
-        self.delete(self.tail)
+        else:
+            tail_value = self.tail.value
+            self.delete(self.tail)
         return tail_value
 
     """Removes the input node from its current spot in the
@@ -147,7 +149,7 @@ class DoublyLinkedList:
         if node is self.head:
             return
         else:
-            old_value = node
+            old_value = node.value
             self.delete(node)
             self.add_to_head(old_value)
 
@@ -158,7 +160,7 @@ class DoublyLinkedList:
         if node == self.tail:
             return
         else:
-            old_value = node
+            old_value = node.value
             self.delete(node)
             self.add_to_tail(old_value)
 
@@ -205,12 +207,12 @@ class DoublyLinkedList:
         current_node = self.head
 
         while current_node is not None:
-            if current_node.next_node is not None:
-                if current_node.value >= current_node.next_node.value:
+            if current_node.next is not None:
+                if current_node.value >= current_node.next.value:
                     current_maximum = current_node
-                    current_node = current_node.next_node
+                    current_node = current_node.next
                 else:
-                    current_maximum = current_node.next_node
-                    current_node = current_node.next_node
+                    current_maximum = current_node.next
+                    current_node = current_node.next
             else:
                 return current_maximum.value
