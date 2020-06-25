@@ -86,9 +86,9 @@ class BSTNode:
         return self.right.get_max()
 
     def for_each(self, fn):
-        fn(self.value)
         if(self.left):
             self.left.for_each(fn)
+        fn(self.value)
         if(self.right):
             self.right.for_each(fn)
 
@@ -98,19 +98,34 @@ class BSTNode:
     # Hint:  Use a recursive, depth first traversal
     def in_order_print(self, node):
         pass
-
     # Print the value of evertrailing_node node, starting with the given node,
     # in an iterative breadth first traversal
+
     def bft_print(self, node):
+        # Create a queue for nodes.
+        # Add the first node to the queue.
+        # While the queue is not empty
+        # remove the first node from the queue and store it in a current_node variable.
+        # print the removed node.
+        # Add all the children into the queue.
+
+        # Print the value of every  node, starting with the given node,
+        # in an iterative depth first traversal
+
         pass
 
-    # Print the value of evertrailing_node node, starting with the given node,
-    # in an iterative depth first traversal
     def dft_print(self, node):
+
+        # Create a stack for nodes.
+        # Add the first node to the stack.
+        # While the stack is not empty
+        # get the current node from the top of the stack.
+        # print that node.
+        # add all children to the stack. The order you add the children will matter.
         pass
 
     # Stretch Goals -------------------------
-    # Note: Research matrailing_node be required
+    # Note: Research may be required
 
     # Print Pre-order recursive DFT
     def pre_order_dft(self, node):
